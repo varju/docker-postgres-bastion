@@ -7,4 +7,9 @@ env \
   | sed -E 's|SSH_KEY_[[:digit:]]+=||' \
   > /root/.ssh/authorized_keys
 
+env \
+  | grep ^PG \
+  | sed -e 's|^|export |' \
+  >> /root/.bashrc
+
 /usr/sbin/sshd -D
