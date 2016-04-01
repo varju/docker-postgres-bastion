@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mkdir -p /root/.ssh /var/run/sshd
+
+env \
+  | grep ^SSH_KEY_ \
+  | sed -E 's|SSH_KEY_[[:digit:]]+=||' \
+  > /root/.ssh/authorized_keys
+
+/usr/sbin/sshd -D
